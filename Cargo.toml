@@ -1,0 +1,21 @@
+[package]
+name = "bare_server_cow"
+version = "0.1.0"
+edition = "2018"
+
+[lib]
+name = "bare_server_cow"
+path = "src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+actix-web = "4"
+actix-http = "3.3.0"
+reqwest = { version = "0.11" }
+tokio = { version = "1", features = ["full"] }
+actix = "0.11.0"
+actix-rt = "2.2" # <-- Runtime for actix
+actix-web-actors = "4.2.0"
