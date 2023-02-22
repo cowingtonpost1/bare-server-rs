@@ -1,21 +1,40 @@
 use std::str::FromStr;
 
 use crate::bare_errors::BareError;
-use actix_http::header::{HeaderMap, HeaderName, HeaderValue};
+use actix_http::{
+    header::{HeaderMap, HeaderName, HeaderValue},
+    Uri,
+};
 use actix_web::HttpRequest;
 use serde_json::{Map, Value};
 
 #[derive(Default)]
 pub struct BareRemote {
-    host: String,
-    port: i32,
-    path: String,
-    protocol: String,
+    pub host: String,
+    pub port: i32,
+    pub path: String,
+    pub protocol: String,
+}
+
+pub trait ToUri {
+    fn to_uri(&self) -> Option<Uri>;
+}
+
+impl ToUri for BareRemote {
+    fn to_uri(&self) -> Option<Uri> {
+        let uri = Uri::builder()
+            .scheme(self.protocol.as_str())
+            .authority(self.host.to_owned() + ":" + &(self.port.to_string().to_owned()))
+            .path_and_query(self.path)
+            .build();
+
+        uri.ok()
+    }
 }
 
 pub struct BareHeaderData {
-    remote: BareRemote,
-    headers: HeaderMap,
+    pub remote: BareRemote,
+    pub headers: HeaderMap,
 }
 
 impl Default for BareHeaderData {

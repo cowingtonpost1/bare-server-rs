@@ -316,6 +316,7 @@ dependencies = [
  "actix-rt",
  "actix-web",
  "actix-web-actors",
+ "hyper",
  "reqwest",
  "serde",
  "serde_json",
