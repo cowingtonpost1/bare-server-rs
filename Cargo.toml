@@ -1,10 +1,10 @@
 [package]
-name = "bare_server_cow"
+name = "bare_server_rs"
 version = "0.1.0"
 edition = "2018"
 
 [lib]
-name = "bare_server_cow"
+name = "bare_server_rs"
 path = "src/lib.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
