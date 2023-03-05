@@ -25,7 +25,7 @@ pub fn get_header<'a>(req: &'a HttpRequest, name: &str) -> Option<&'a str> {
     method = "PATCH",
     method = "TRACE"
 )]
-pub async fn hello(req: HttpRequest) -> impl Responder {
+pub async fn v1_index(req: HttpRequest) -> impl Responder {
     let headers = parse_headers(&req);
     if let Result::Err(headers) = headers {
         return headers.respond_to(&req);
@@ -37,11 +37,6 @@ pub async fn hello(req: HttpRequest) -> impl Responder {
         }
     }
     HttpResponse::Ok().body("Hello world!")
-}
-
-#[post("/echo")]
-pub async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
 }
 
 #[get("/")]
@@ -56,8 +51,4 @@ pub async fn index(_req: HttpRequest) -> impl Responder {
             }
                 "#,
     )
-}
-
-pub async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
 }
