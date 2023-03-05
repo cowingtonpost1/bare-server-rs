@@ -1,5 +1,5 @@
 mod cow;
-use crate::cow::{bare_errors, parse_headers, serve};
+use crate::cow::{bare_errors, parse_headers, serve, websocket_protocol};
 
 use actix_web::web;
 

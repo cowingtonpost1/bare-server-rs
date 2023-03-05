@@ -6,6 +6,7 @@ use actix_http::{
     Uri,
 };
 use actix_web::HttpRequest;
+use awc::{Client, ClientBuilder, ClientRequest};
 use serde_json::{Map, Value};
 
 #[derive(Default)]
@@ -20,12 +21,25 @@ pub trait ToUri {
     fn to_uri(&self) -> Option<Uri>;
 }
 
+pub trait ApplyHeaders {
+    fn apply_headers(&self, _: &mut ClientRequest);
+}
+
+//impl ApplyHeaders for HeaderMap {
+//    fn apply_headers(&self, builder: &mut ClientRequest) {
+//        builder.headers_mut().clear();
+//        for header in self.iter() {
+//            builder.insert_header(header.clone());
+//        }
+//    }
+//}
+
 impl ToUri for BareRemote {
     fn to_uri(&self) -> Option<Uri> {
         let uri = Uri::builder()
             .scheme(self.protocol.as_str())
             .authority(self.host.to_owned() + ":" + &(self.port.to_string().to_owned()))
-            .path_and_query(self.path)
+            .path_and_query(self.path.clone())
             .build();
 
         uri.ok()
