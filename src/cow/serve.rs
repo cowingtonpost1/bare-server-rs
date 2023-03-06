@@ -46,11 +46,15 @@ pub async fn v1_index(req: HttpRequest, mut payload: web::Payload) -> impl Respo
             let mut c_req = _client.request(req.method().clone(), _req_uri);
             headers.headers.apply_headers(&mut c_req);
 
+            println!("{:#?}", c_req);
+
             let re = c_req.send_stream(payload).await;
+
+            // let re = c_req.send().await;
 
             if let Err(_err) = re {
                 // TODO: make errors compiliant with specification
-                println!("{:#?}", _err);
+                println!("E: {:#?}", _err);
                 return BareError {
                     code: "HOST_NOT_FOUND".to_owned(),
                     id: "a".to_owned(),

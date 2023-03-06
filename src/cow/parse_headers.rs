@@ -42,6 +42,7 @@ impl ToUri for BareRemote {
         let uri = Uri::builder()
             .scheme(self.protocol.as_str())
             .authority(self.host.to_owned() + ":" + &(self.port.to_string().to_owned()))
+            //.authority(self.host.to_owned())
             .path_and_query(self.path.clone())
             .build();
 
