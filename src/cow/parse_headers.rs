@@ -45,6 +45,8 @@ impl ToUri for BareRemote {
             .path_and_query(self.path.clone())
             .build();
 
+        println!("{:#?}, Protocol: {}", uri, self.protocol);
+
         uri.ok()
     }
 }
@@ -77,30 +79,39 @@ pub fn parse_headers(req: &HttpRequest) -> Result<BareHeaderData, BareError> {
 
         if let Some(value) = get_header(&req, &header) {
             println!("Some {}", &header);
-            if "port".eq(remote_prop) {
-                if let Some(_) = value.to_string().parse::<i32>().ok() {
-                    println!("Port {} ok", value);
-                } else {
-                    return Err(BareError {
-                        code: "INVALID_BARE_HEADER".to_string(),
-                        id: "request.headers.".to_owned() + &header,
-                        message: "Header was not a valid integer.".to_string(),
-                    });
+            match remote_prop {
+                "host" => {
+                    remote.remote.host = value.to_owned();
                 }
-            } else if "protocol".eq(remote_prop) {
-                if !VALID_PROTOCOLS.contains(&value) {
-                    return Err(BareError {
-                        code: "INVALID_BARE_HEADER".to_string(),
-                        id: "request.headers.".to_owned() + &header,
-                        message: "Header was invalid".to_string(),
-                    });
+                "path" => {
+                    remote.remote.path = value.to_owned();
                 }
+                "port" => {
+                    if let Some(val) = value.to_string().parse::<i32>().ok() {
+                        println!("Port {} ok", value);
+                        remote.remote.port = val;
+                    } else {
+                        return Err(BareError {
+                            code: "INVALID_BARE_HEADER".to_string(),
+                            id: "request.headers.".to_owned() + &header,
+                            message: "Header was not a valid integer.".to_string(),
+                        });
+                    }
+                }
+                "protocol" => {
+                    println!("Header Protocol: {}", value);
+                    if !VALID_PROTOCOLS.contains(&value) {
+                        return Err(BareError {
+                            code: "INVALID_BARE_HEADER".to_string(),
+                            id: "request.headers.".to_owned() + &header,
+                            message: "Header was invalid".to_string(),
+                        });
+                    }
+                    remote.remote.protocol = value.to_owned();
+                    remote.remote.protocol.pop();
+                }
+                _ => unreachable!(),
             }
-
-            remote.headers.insert(
-                HeaderName::from_str(&header).unwrap(),
-                HeaderValue::from_str(&value).unwrap(),
-            );
         } else {
             println!("Header missing: {}", &header);
             return Err(BareError {

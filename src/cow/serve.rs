@@ -41,6 +41,8 @@ pub async fn v1_index(req: HttpRequest, mut payload: web::Payload) -> impl Respo
 
             let _req_uri = headers.remote.to_uri().unwrap();
 
+            println!("{:#?}", _req_uri);
+
             let mut c_req = _client.request(req.method().clone(), _req_uri);
             headers.headers.apply_headers(&mut c_req);
 
@@ -48,6 +50,7 @@ pub async fn v1_index(req: HttpRequest, mut payload: web::Payload) -> impl Respo
 
             if let Err(_err) = re {
                 // TODO: make errors compiliant with specification
+                println!("{:#?}", _err);
                 return BareError {
                     code: "HOST_NOT_FOUND".to_owned(),
                     id: "a".to_owned(),
