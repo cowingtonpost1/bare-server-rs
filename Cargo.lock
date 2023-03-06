@@ -403,6 +403,7 @@ dependencies = [
  "awc",
  "futures",
  "http",
+ "rustls",
  "serde",
  "serde_json",
  "tokio",
