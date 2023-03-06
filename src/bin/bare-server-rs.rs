@@ -1,6 +1,6 @@
 use actix_web::{
-    body::BoxBody, get, http::header::ContentType, post, web, App, HttpRequest, HttpResponse,
-    HttpServer, Responder,
+    App,
+    HttpServer,
 };
 
 #[actix_web::main]
