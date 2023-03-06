@@ -134,6 +134,7 @@ pub fn parse_headers(req: &HttpRequest) -> Result<BareHeaderData, BareError> {
                 })
             }
         };
+        println!("Bare Headers: {:#?}", json);
 
         for (k, v) in json {
             match v {
@@ -191,6 +192,7 @@ pub fn parse_headers(req: &HttpRequest) -> Result<BareHeaderData, BareError> {
                 })
             }
         };
+        println!("Forward Headers: {:#?}", json);
         for cow in json {
             if let Value::String(cow) = cow {
                 if let Some(req_header) = get_header(&req, &cow) {

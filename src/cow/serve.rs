@@ -94,6 +94,13 @@ pub async fn v1_index(req: HttpRequest, mut payload: web::Payload) -> impl Respo
     HttpResponse::Ok().body("Hello world!")
 }
 
+#[get("/ws-new-meta")]
+pub async fn v1_ws_new_meta(_req: HttpRequest) -> impl Responder {
+    return HttpResponse::Ok()
+        .content_type(ContentType::plaintext())
+        .body("");
+}
+
 #[get("/")]
 pub async fn index(_req: HttpRequest) -> impl Responder {
     HttpResponse::Ok().content_type(ContentType::json()).body(
