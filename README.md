@@ -5,10 +5,10 @@ An implementation of the [TompHTTP Bare Server V1 Specification](https://github.
 This is highly work in progress and does not completely work. Simple HTTP
 requests somewhat work. A basic Ultraviolet frontend works with simple HTTP and
 some HTTPS sites. More debugging still needs to be done and work needs to be
-started on the Web Socket API. Specifically, google and duck duck go do not work, startpage does work.
+started on the Web Socket API. Specifically, Google and duck duck go do not work, startpage does work.
 
 ## TODO
-- Fix/Debug proxied requests.
+- Fix/Debug proxied requests for some sites.
 - Implement the Web Socket routes.
 
 
