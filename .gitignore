@@ -1,3 +1,4 @@
 /target
 /testing/node_modules
 /static/*
+Cargo.lock

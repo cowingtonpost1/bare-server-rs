@@ -7,9 +7,10 @@ use actix_http::{
 };
 use actix_web::HttpRequest;
 use awc::ClientRequest;
+use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 
-#[derive(Default)]
+#[derive(Default, Serialize, Deserialize, Debug)]
 pub struct BareRemote {
     pub host: String,
     pub port: i32,
