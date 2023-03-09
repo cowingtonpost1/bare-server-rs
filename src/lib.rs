@@ -8,6 +8,7 @@ use actix_web::web;
 use cow::serve::AppValue;
 use tokio::sync::Mutex;
 
+#[doc = include_str!("docs/configure.md")]
 pub fn configure(cfg: &mut web::ServiceConfig) {
     let app_state: Arc<Mutex<HashMap<String, AppValue>>> = Default::default();
     cfg.app_data(web::Data::new(app_state));
