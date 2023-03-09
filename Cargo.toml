@@ -2,7 +2,7 @@
 name = "bare_server_rs"
 version = "0.1.0"
 authors = ["Hollister <cowingtonpost@gmail.com>"]
-edition = "2022"
+edition = "2021"
 license = "AGPL-3.0"
 keywords = ["proxy", "tomphttp"]
 categories = ["command-line-utilities"]
