@@ -44,7 +44,7 @@ impl Default for AppValue {
 }
 
 struct BareWebsocket {
-    id: String,
+    mystate: AppValue,
 }
 
 impl Actor for BareWebsocket {
@@ -104,13 +104,7 @@ pub async fn v1_index(req: HttpRequest, payload: web::Payload) -> HttpResponse {
                 };
 
                 let json: AppValue = serde_json::from_str(json.as_str()).unwrap();
-                let re = ws::start(
-                    BareWebsocket {
-                        id: json.id.unwrap().to_string(),
-                    },
-                    &req,
-                    payload,
-                );
+                let re = ws::start(BareWebsocket { mystate: json }, &req, payload);
                 if let Ok(r) = re {
                     return r;
                 }

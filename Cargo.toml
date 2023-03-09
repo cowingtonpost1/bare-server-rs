@@ -1,13 +1,19 @@
 [package]
 name = "bare_server_rs"
 version = "0.1.0"
-edition = "2018"
+authors = ["Hollister <cowingtonpost@gmail.com>"]
+edition = "2022"
+license = "AGPL-3.0"
+keywords = ["proxy", "tomphttp"]
+categories = ["command-line-utilities"]
+description = "A TompHTTP Bare server V1 Written in Rust."
+homepage = "https://github.com/cowingtonpost1/bare-server-rs"
+repository = "https://github.com/cowingtonpost1/bare-server-rs"
+readme = "README.md"
 
 [lib]
 name = "bare_server_rs"
 path = "src/lib.rs"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
